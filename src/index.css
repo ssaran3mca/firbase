@@ -1,0 +1,27 @@
+.logo {
+  z-index: 1;
+}
+
+.login-logout-form form {
+  top: 20%;
+  right: 0;
+  left: 0;
+  background: #0000008f;
+  width: 25%;
+  padding: 20px;
+  color: #fff;
+  margin: 0 auto;
+}
+
+.login-logout-form img {
+  width: 100%;
+}
+
+.logout {
+  cursor: pointer;
+}
+
+.logout img {
+  width: 60px;
+  padding: 10px;
+}
