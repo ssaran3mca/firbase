@@ -3,13 +3,19 @@ import { LOGO } from '../utils/constant'
 import { auth } from '../utils/firebase';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+
+import { useDispatch } from "react-redux";
+import { addUser, removeUser } from "../utils/userSlice";
 const Header = () => {
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     const user = useSelector(stor => stor.user)
-    console.log(user)
+    // console.log(user)
     const handleClick = () => {
         signOut(auth).then(() => {
-            navigate('/')
+            // navigate('/')
             // Sign-out successful.
         }).catch((error) => {
             // An error happened.
@@ -17,6 +23,24 @@ const Header = () => {
         });
 
     }
+    useEffect(() => {
+        const unsubscription = onAuthStateChanged(auth, (user) => {
+            if (user) {
+
+                const { uid, email, displayName, photoURL } = user;
+                dispatch(addUser({ uid: uid, email: email, displayName: displayName, photoURL: photoURL }));
+                navigate('/browser')
+                // ...
+            } else {
+
+                dispatch(removeUser());
+                navigate('/')
+                // User is signed out
+                // ...
+            }
+        });
+        return unsubscription;
+    }, [])
     return (
         <div>
             <div className={!user && 'position-absolute'} >
@@ -26,9 +50,9 @@ const Header = () => {
                 }
             </div>
 
-            <div className=''>
+            {/* <div className=''>
                 <h1 >{user?.displayName}</h1>
-            </div>
+            </div> */}
         </div>
     )
 

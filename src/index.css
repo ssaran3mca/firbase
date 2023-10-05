@@ -25,3 +25,18 @@
   width: 60px;
   padding: 10px;
 }
+
+.trailervideo iframe {
+  position: absolute;
+  top: 0;
+  z-index: 0;
+}
+
+.trailertext {
+  z-index: 2;
+}
+
+.logout {
+  z-index: 2;
+  position: relative;
+}

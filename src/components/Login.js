@@ -3,9 +3,10 @@ import Header from './Header';
 import { checkValiData } from '../utils/validate';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
+import { AVATHAR_IMG } from '../utils/constant';
 const Login = () => {
     const [loginDet, setLogIn] = useState(true);
     const [errorMessage, seterrorMessage] = useState(null);
@@ -15,26 +16,26 @@ const Login = () => {
     const name = useRef(null);
     const email = useRef(null);
     const password = useRef(null);
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleClickLoginSigin = () => {
         const message = checkValiData(email.current.value, password.current.value)
-        console.log(message);
+        // console.log(loginDet);
         seterrorMessage(message)
         if (message) return;
         if (!loginDet) {
-
+            alert("loginDet")
             createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
                 .then((userCredential) => {
                     // Signed up 
                     const user = userCredential.user;
                     updateProfile(auth.currentUser, {
-                        displayName: name.current.value, photoURL: "https://avatars.githubusercontent.com/u/136312790?v=4"
+                        displayName: name.current.value, photoURL: AVATHAR_IMG
                     }).then(() => {
 
                         const { uid, email, displayName, photoURL } = auth.currentUser;
                         dispatch(addUser({ uid: uid, email: email, displayName: displayName, photoURL: photoURL }));
-                        navigate('/browser');
+                        // navigate('/browser');
                         // Profile updated!
                         // ...
                     }).catch((error) => {
@@ -42,7 +43,7 @@ const Login = () => {
                         // ...
                         seterrorMessage(error.message)
                     });
-                    console.log(user);
+                    // console.log(user);
 
                     // ...
                 })
@@ -58,8 +59,8 @@ const Login = () => {
                 .then((userCredential) => {
                     // Signed in 
                     const user = userCredential.user;
-                    console.log(user);
-                    navigate('/browser')
+                    // console.log(user);
+                    // navigate('/browser')
                     // ...
                 })
                 .catch((error) => {
