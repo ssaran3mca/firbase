@@ -2,7 +2,7 @@
 import { useSelector } from "react-redux";
 import useMovieTrailer from "../hooks/useMovieTrailer";
 
-const MoviesTitle = ({ id }) => {
+const MoviesVideos = ({ id }) => {
     useMovieTrailer(id);
     const trailerVideos = useSelector(store => store.movies.trailerVideo);
     if (!trailerVideos) return null;
@@ -20,4 +20,4 @@ const MoviesTitle = ({ id }) => {
     )
 }
 
-export default MoviesTitle
+export default MoviesVideos

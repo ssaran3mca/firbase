@@ -10,3 +10,4 @@ export const API_OPTIONS = {
     }
 };
 
+export const IMG_MOVIE = 'https://image.tmdb.org/t/p/w500/';

@@ -27,16 +27,48 @@
 }
 
 .trailervideo iframe {
-  position: absolute;
-  top: 0;
-  z-index: 0;
+  pointer-events: none;
+
 }
 
+
+
 .trailertext {
+  position: absolute;
+  top: 40%;
+  right: 0;
   z-index: 2;
 }
 
 .logout {
   z-index: 2;
   position: relative;
+}
+
+
+
+
+.cards-wrapper {
+  grid-column: center-start / -1;
+  display: grid;
+  grid-auto-flow: column;
+  gap: 1rem;
+  overflow: auto;
+  padding-bottom: 1rem;
+  padding-right: var(--page-margin);
+
+}
+
+.cards-wrapper .card {
+  display: grid;
+  place-content: center;
+  background-color: #d0f0ee;
+  color: #15928a;
+  font-size: 1.5rem;
+  height: 20rem;
+  min-width: 13rem;
+}
+
+.cards-wrapper .card img {
+  width: 100%;
 }

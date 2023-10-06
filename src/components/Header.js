@@ -42,11 +42,11 @@ const Header = () => {
         return unsubscription;
     }, [])
     return (
-        <div>
+        <div className='position-absolute w-100'>
             <div className={!user && 'position-absolute'} >
                 <img className='position-relative logo' src={LOGO} width="260" />
                 {user &&
-                    <p className="float-end p-2 m-5 logout" onClick={handleClick}>   <img alt="" src={user?.photoURL} ></img>Log out user</p>
+                    <p className="float-end p-2 m-5 logout text-white " onClick={handleClick}>   <img alt="" src={user?.photoURL} ></img>Log out user</p>
                 }
             </div>
 

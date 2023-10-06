@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux"
-import MovieVideo from "./MovieVideo"
-import MoviesTitle from "./MoviesTitle"
+import MovieTitles from "./MovieTitles"
+import MoviesVideos from "./MoviesVideos"
 
 const MainContainer = () => {
     const movies = useSelector(store => store.movies?.nowPlayingMovie)
@@ -10,9 +10,9 @@ const MainContainer = () => {
     const { original_title, overview, id } = mainMovies
 
     return (
-        <div>
-            <MovieVideo title={original_title} discription={overview} />
-            <MoviesTitle id={id} />
+        <div className="position-relative" >
+            <MoviesVideos id={id} />
+            <MovieTitles title={original_title} discription={overview} />
         </div>
     )
 }
