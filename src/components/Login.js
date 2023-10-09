@@ -6,7 +6,7 @@ import { auth } from "../utils/firebase";
 // import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
-import { AVATHAR_IMG } from '../utils/constant';
+import { AVATHAR_IMG, IMG_BG } from '../utils/constant';
 const Login = () => {
     const [loginDet, setLogIn] = useState(true);
     const [errorMessage, seterrorMessage] = useState(null);
@@ -76,8 +76,7 @@ const Login = () => {
         <>
             <Header />
             <div className='position-relative login-logout-form'>
-                <img src="https://assets.nflxext.com/ffe/siteui/vlv3/9db4a880-3034-4e98-bdea-5d983e86bf52/b5953637-091d-4e02-9754-2bfadc8a8f7c/IN-en-20230925-popsignuptwoweeks-perspective_alpha_website_large.jpg" >
-                </img>
+                <img src={IMG_BG} />
                 <form onSubmit={e => e.preventDefault()} className='position-absolute'>
                     {errorMessage}
                     <h3 className='mb-4 text-center'>{loginDet ? 'Log In' : 'Sign Up'}</h3>

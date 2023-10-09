@@ -1,18 +1,20 @@
 import { signOut } from 'firebase/auth';
-import { LOGO } from '../utils/constant'
+import { LOGO, MULTI_LANGUAGE } from '../utils/constant'
 import { auth } from '../utils/firebase';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 
 import { useDispatch } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
+import { toggleGptSearchView } from '../utils/gptSlice';
+import { chnageLanguages } from '../utils/configSlice';
 const Header = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const user = useSelector(stor => stor.user)
-    // console.log(user)
+
     const handleClick = () => {
         signOut(auth).then(() => {
             // navigate('/')
@@ -23,6 +25,15 @@ const Header = () => {
         });
 
     }
+
+    // const {slectLag, setSelectLag} = useState("")
+    const handleClickGpt = () => {
+        dispatch(toggleGptSearchView())
+    }
+    const handleChange = (e) => {
+        dispatch(chnageLanguages(e.target.value))
+    }
+    const showGptSearch = useSelector(stor => stor.gpt.showGptSearch);
     useEffect(() => {
         const unsubscription = onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -42,17 +53,26 @@ const Header = () => {
         return unsubscription;
     }, [])
     return (
-        <div className='position-absolute w-100'>
+        <div className='position-absolute w-100 header'>
             <div className={!user && 'position-absolute'} >
                 <img className='position-relative logo' src={LOGO} width="260" />
                 {user &&
-                    <p className="float-end p-2 m-5 logout text-white " onClick={handleClick}>   <img alt="" src={user?.photoURL} ></img>Log out user</p>
+                    <div className="float-end logout">
+                        {showGptSearch && <select className=" btn btn-light mx-1" aria-label="Default select example" onChange={handleChange}>
+                            {MULTI_LANGUAGE.map((langu) => (
+                                <option key={langu.identifier} value={langu.identifier}>{langu.name}</option>
+                            ))}
+                        </select>}
+
+                        <button type="button" className="btn btn-info mx-5" onClick={handleClickGpt}>{
+                            showGptSearch ? "Home Page" : "GO to GPT Search"
+                        }</button>
+                        <img alt="" src={user?.photoURL} ></img>
+                        <span onClick={handleClick} className="p-2 m-5  text-white ">Log out user</span></div>
                 }
             </div>
 
-            {/* <div className=''>
-                <h1 >{user?.displayName}</h1>
-            </div> */}
+
         </div>
     )
 

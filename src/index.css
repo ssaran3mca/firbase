@@ -72,3 +72,18 @@
 .cards-wrapper .card img {
   width: 100%;
 }
+
+.header {
+  /* background: black; */
+}
+
+.gptsearch-icon {
+  position: absolute;
+  top: 42%;
+  width: 60%;
+  background: black;
+  margin: 0 auto;
+  right: 0;
+  left: 0;
+  padding: 10px;
+}
