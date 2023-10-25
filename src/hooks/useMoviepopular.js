@@ -8,7 +8,7 @@ import { addpopularMovie } from "../utils/movieSlice";
 const useMoivePopular = () => {
     const dispatch = useDispatch()
     const popularMov = useSelector(store => store.movies.papularMOvie);
-    console.log(popularMov)
+    // console.log(popularMov)
     const getMoviePopulars = async () => {
         const data = await fetch('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1', API_OPTIONS)
         const json = await data.json();
