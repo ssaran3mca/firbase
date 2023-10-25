@@ -18,3 +18,8 @@ export const MULTI_LANGUAGE = [
     { identifier: 'tamil', name: 'Tamil' },
     { identifier: 'hindi', name: 'Hindi' }
 ]
+
+export const GPT_KEY = process.env.REACT_APP_TMTB_MAIN_KEY;
+
+// tmtp key
+// 

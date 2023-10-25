@@ -24,10 +24,11 @@ const Login = () => {
         seterrorMessage(message)
         if (message) return;
         if (!loginDet) {
-            alert("loginDet")
+            // alert("loginDet")
             createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
                 .then((userCredential) => {
                     // Signed up 
+                    email.current.focus();
                     const user = userCredential.user;
                     updateProfile(auth.currentUser, {
                         displayName: name.current.value, photoURL: AVATHAR_IMG
